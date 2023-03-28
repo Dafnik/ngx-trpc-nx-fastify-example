@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:10.11.2-jammy
+    restart: always
+    volumes:
+      - mariadb:/var/lib/mysql:z
+    environment:
+      MYSQL_DATABASE: poweruptime
+      MYSQL_USER: poweruptime
+      MYSQL_PASSWORD: poweruptime
+      MYSQL_ROOT_PASSWORD: poweruptime
+    networks:
+      - network
+    ports:
+      - '3326:3306'
+
+volumes:
+  mariadb:
+
+networks:
+  network:

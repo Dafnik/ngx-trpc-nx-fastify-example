@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Necessary for Next auth
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  sessions      Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum MonitorType {
+  NORMAL
+  REVERSED
+}
+
+enum MonitorMode {
+  ONLINE
+  OFFLINE
+  MAINTENANCE
+}
+
+enum MonitorStatus {
+  OK
+  ERROR
+  UNKNOWN
+}
+
+model Monitor {
+  id   String @id @default(cuid())
+  name String
+
+  type       MonitorType
+  mode       MonitorMode   @default(ONLINE)
+  lastStatus MonitorStatus @default(UNKNOWN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  checkDelay BigInt // Delay between checks in seconds
+  pings      Ping[]
+}
+
+enum PingStatus {
+  SUCCESS
+  ERROR
+}
+
+model Ping {
+  id     String     @id @default(uuid())
+  status PingStatus
+
+  monitorId String
+  monitor   Monitor @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([monitorId])
+}
