@@ -24,8 +24,6 @@
     "@fastify/autoload": "~5.7.1",
     "@fastify/cors": "^8.2.1",
     "@fastify/sensible": "~5.2.0",
-    "@nguniversal/builders": "^15.2.0",
-    "@nguniversal/express-engine": "^15.2.0",
     "@nrwl/angular": "15.8.9",
     "@prisma/client": "^4.11.0",
     "@trpc/client": "^10.18.0",
