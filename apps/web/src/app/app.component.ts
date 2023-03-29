@@ -1,14 +1,24 @@
-import {NxWelcomeComponent} from './nx-welcome.component';
-import {RouterModule} from '@angular/router';
 import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {injectTRPCClient} from './trpc';
+import {AsyncPipe, JsonPipe, NgForOf, NgIf} from '@angular/common';
+import {tap} from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
   selector: 'poweruptime-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  imports: [RouterOutlet, AsyncPipe, JsonPipe, NgIf, NgForOf],
+  template: `
+    <router-outlet />
+    <div *ngIf="hello$ | async as hello">
+      <article *ngFor="let m of hello">
+        <h4>{{ m.name }}</h4>
+      </article>
+    </div>
+  `,
 })
 export class AppComponent {
-  title = 'web';
+  hello$ = injectTRPCClient()
+    .example.hello4.query()
+    .pipe(tap((monitors) => console.log(monitors)));
 }

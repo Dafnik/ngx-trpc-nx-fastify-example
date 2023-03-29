@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@poweruptime/api": ["libs/api/src/index.ts"],
+      "@poweruptime/db": ["libs/db/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
