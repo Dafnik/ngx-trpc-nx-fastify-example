@@ -3,7 +3,6 @@ import {inject, InjectionToken, Provider} from '@angular/core';
 import {httpBatchLink} from '@trpc/client';
 import {createTRPCRxJSProxyClient} from 'ngx-trpc';
 import superjson from 'superjson';
-
 import type {AppRouter} from '@poweruptime/api';
 
 export const TRPC_PROVIDER = new InjectionToken<ReturnType<typeof createTRPCRxJSProxyClient<AppRouter>>>('___TRPC_PROVIDER___');

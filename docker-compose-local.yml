@@ -16,7 +16,20 @@ services:
     ports:
       - '3326:3306'
 
+  redis:
+    image: redis:7.0.10-alpine
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - redis:/data
+    networks:
+      - network
+    ports:
+      - '3327:6379'
+
 volumes:
+  redis:
   mariadb:
 
 networks:

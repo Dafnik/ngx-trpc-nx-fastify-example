@@ -2,8 +2,8 @@ import * as path from 'path';
 import {FastifyInstance} from 'fastify';
 import AutoLoad from '@fastify/autoload';
 import {fastifyTRPCPlugin} from '@trpc/server/adapters/fastify';
-import {appRouter, createTRPCContext} from '@poweruptime/api';
 import cors from '@fastify/cors';
+import {appRouter, createTRPCContext} from '@poweruptime/api';
 
 /* eslint-disable-next-line */
 export interface AppOptions {}

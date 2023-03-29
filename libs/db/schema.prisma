@@ -41,8 +41,8 @@ model VerificationToken {
 }
 
 enum MonitorType {
-  NORMAL
-  REVERSED
+  ACTIVE
+  PASSIVE
 }
 
 enum MonitorMode {

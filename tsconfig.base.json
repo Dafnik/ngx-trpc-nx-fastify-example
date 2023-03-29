@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@poweruptime/api": ["libs/api/src/index.ts"],
+      "@poweruptime/bull": ["libs/bull/src/index.ts"],
+      "@poweruptime/common": ["libs/common/src/index.ts"],
       "@poweruptime/db": ["libs/db/src/index.ts"]
     }
   },
