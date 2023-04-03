@@ -40,14 +40,9 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-enum MonitorType {
-  ACTIVE
-  PASSIVE
-}
-
 enum MonitorMode {
-  ONLINE
-  OFFLINE
+  ON
+  OFF
   MAINTENANCE
 }
 
@@ -57,19 +52,26 @@ enum MonitorStatus {
   UNKNOWN
 }
 
+enum MonitorType {
+  PING
+  PING_REVERSED
+  HTTP
+}
+
 model Monitor {
   id   String @id @default(cuid())
   name String
 
-  type       MonitorType
-  mode       MonitorMode   @default(ONLINE)
+  mode       MonitorMode   @default(ON)
   lastStatus MonitorStatus @default(UNKNOWN)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  checkDelay BigInt // Delay between checks in seconds
-  pings      Ping[]
+  url       String
+  arguments String @db.LongText
+  delay     BigInt // Delay between checks in seconds
+  pings     Ping[]
 }
 
 enum PingStatus {

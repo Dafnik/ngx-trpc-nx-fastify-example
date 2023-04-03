@@ -37,12 +37,13 @@ CREATE TABLE `VerificationToken` (
 CREATE TABLE `Monitor` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `type` ENUM('NORMAL', 'REVERSED') NOT NULL,
-    `mode` ENUM('ONLINE', 'OFFLINE', 'MAINTENANCE') NOT NULL DEFAULT 'ONLINE',
+    `mode` ENUM('ON', 'OFF', 'MAINTENANCE') NOT NULL DEFAULT 'ON',
     `lastStatus` ENUM('OK', 'ERROR', 'UNKNOWN') NOT NULL DEFAULT 'UNKNOWN',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
-    `checkDelay` BIGINT NOT NULL,
+    `url` VARCHAR(191) NOT NULL,
+    `arguments` LONGTEXT NOT NULL,
+    `delay` BIGINT NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

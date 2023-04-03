@@ -36,11 +36,11 @@
         }
       }
     },
+    "push": {
+      "command": "npx prisma db push --force-reset --schema ./libs/db/schema.prisma"
+    },
     "generate": {
       "command": "npx prisma generate --schema ./libs/db/schema.prisma"
-    },
-    "migrate": {
-      "command": "npx prisma migrate dev --schema=./libs/db/schema.prisma"
     },
     "migrate-deploy": {
       "command": "npx prisma migrate deploy dev --schema=./libs/db/schema.prisma"

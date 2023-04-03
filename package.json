@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "serve": "pnpm exec nx build api && pnpm exec nx run-many --parallel --target=serve --projects=backend,web,bull",
+    "serve": "pnpm exec nx run-many --parallel --target=serve --projects=backend,web,runner",
     "postinstall": "prisma generate",
     "prepare": "husky install",
     "docker:start": "docker compose -f docker-compose-local.yml up -d",
     "docker:stop": "docker compose -f docker-compose-local.yml down",
     "hook:pre-commit": "lint-staged",
-    "prettify": "prettier --write ."
+    "prettify": "prettier --write .",
+    "db:migrate": "env-cmd -f .env.local pnpx prisma migrate dev --schema=./libs/db/schema.prisma --name"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "@trpc/server": "^10.18.0",
     "axios": "^1.0.0",
     "bullmq": "^3.10.2",
+    "env-cmd": "^10.1.0",
     "fastify": "~4.13.0",
     "fastify-plugin": "~4.5.0",
     "ioredis": "^5.3.1",
@@ -57,6 +59,7 @@
     "@nrwl/js": "15.8.9",
     "@nrwl/linter": "15.8.9",
     "@nrwl/node": "^15.8.9",
+    "@nrwl/webpack": "15.8.9",
     "@nrwl/workspace": "15.8.9",
     "@schematics/angular": "~15.2.0",
     "@types/jest": "^29.4.0",
