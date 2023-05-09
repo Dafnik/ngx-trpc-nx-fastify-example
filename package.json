@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "serve": "npm exec nx run-many --parallel --target=serve --projects=backend,web,runner",
+    "serve": "nx run-many --parallel --targets=serve --projects=backend,web",
     "postinstall": "prisma generate",
     "prepare": "husky install",
     "docker:start": "docker compose -f docker-compose-local.yml up -d",

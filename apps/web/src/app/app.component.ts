@@ -19,6 +19,6 @@ import {tap} from 'rxjs';
 })
 export class AppComponent {
   hello$ = injectTRPCClient()
-    .example.hello4.query()
+    .example.hello2.query()
     .pipe(tap((monitors) => console.log(monitors)));
 }
